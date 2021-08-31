@@ -15,7 +15,7 @@ KET has following feature.
 - The necessary client tools include **client-go and kubectl**
 - Reproduce declarative resource state, i.e., **kubectl apply -f**
 
-Istio is composed of these components:
+KET is composed of these components:
 
 - <a href="https://kind.sigs.k8s.io/">Kind</a>
 - <a href="https://skaffold.dev/">Skaffold</a>
@@ -80,13 +80,10 @@ func TestMain(m *testing.M) {
 `setup.Start` will start one or more goroutines.
 It is desirable to give a context that will be canceled() at the end of the test.
 
-
-
 ### WithBinaryDirectory
 
 Save the binary, e.g. kubectl, in the specified directory.
 By default, `. /bin` is used.
-
 
 ### WithKindClusterName
 
@@ -98,7 +95,7 @@ By default, `ket` is used.
 It is possible to change the PATH of kubeconfig.
 The default is to use `$HOME/.kube/config`.
 
-Please See below for details.
+Please see below for details.
 https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/
 
 ### WithCRDKustomizePath
