@@ -31,6 +31,16 @@ If you want to do E2E (end to end) testing against your Kubernetes controller.
 We recommend you to build a cluster environment using TestMain.
 
 ```go
+import (
+	"context"
+	"fmt"
+	"os"
+	"testing"
+
+	"github.com/riita10069/ket/pkg/setup"
+	"k8s.io/apimachinery/pkg/types"
+)
+
 func TestMain(m *testing.M) {
 	os.Exit(func() int {
 		ctx := context.Background()
@@ -54,13 +64,13 @@ func TestMain(m *testing.M) {
 			return 1
 		}
 
-		kubectl = cliSet.Kubectl
+		kubectl := cliSet.Kubectl
 		_, err = kubectl.WaitAResource(
 			ctx,
 			"deploy",
 			types.NamespacedName{
-				Namespace: CONTROLLER_NAMESPACE,
-				Name:      CONTROLLER_NAME,
+				Namespace: "CONTROLLER_NAMESPACE",
+				Name:      "CONTROLLER_NAME",
 			},
 		)
 		if err != nil {
