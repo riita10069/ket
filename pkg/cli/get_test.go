@@ -9,7 +9,7 @@ import (
 	"github.com/riita10069/ket/pkg/kind"
 	"github.com/riita10069/ket/pkg/kubectl"
 	"github.com/riita10069/ket/pkg/skaffold"
-	)
+)
 
 const (
 	binDir         = "./bin"

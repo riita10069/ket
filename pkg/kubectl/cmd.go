@@ -189,7 +189,7 @@ func (k *Kubectl) GetResourceStatusList(ctx context.Context, namespacedName type
 		return false, nil
 	}
 	statusList := strings.Split(list, " ")
-	if slice.Contains([]string{"po", "pod", "pods"}, resource)  {
+	if slice.Contains([]string{"po", "pod", "pods"}, resource) {
 		if !slice.Contains(statusList, "Ready") {
 			return false, nil
 		}
