@@ -95,7 +95,7 @@ func (k *Kubectl) Execute(ctx context.Context, args []string) error {
 	return cli.Run(ctx, k, args, os.Stdout, os.Stderr)
 }
 
-// Capture execute command with returning outs as string
+// Capture execute command with returning outs as string.
 func (k *Kubectl) Capture(ctx context.Context, args []string) (stdout string, stderr string, err error) {
 	return cli.Capture(ctx, k, args)
 }

@@ -14,7 +14,7 @@ func Run(ctx context.Context, cli CLI, args []string, stdout, stderr io.Writer) 
 	if err != nil {
 		return fmt.Errorf("failed to ensure %s: %w", cli.Name(), err)
 	}
-	cmd := exec.CommandContext(ctx, cli.Path(), args...)
+	cmd := exec.CommandContext(ctx, cli.Path(), args...) //nolint:gosec
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
 	cmd.Stdin = os.Stdin

@@ -10,6 +10,8 @@ output:
   uniq-by-line: false
 
 linter-settings:
+  lll:
+    line-length: 220
   gosec:
     includes:
       - G401
@@ -29,11 +31,27 @@ linter-settings:
 linters:
   enable-all: true
   disable:
-    - gochecknoglobals
-    - gochecknoinits
-    - godox
-    - nestif
-    - wsl
     - exhaustivestruct
-    - goerr113
     - wrapcheck
+    - testpackage
+    - paralleltest
+    - nestif
+    - godot
+    - wsl
+    - lll
+    - dupl
+    - funlen
+    - gochecknoinits
+    - gochecknoglobals
+    - godox
+    - maligned
+    - gocognit
+    - gocyclo
+    - interfacer
+    - gomnd
+    - goerr113
+    - nlreturn
+    - ifshort
+    - golint
+    - scopelint
+  fast: false

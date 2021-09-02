@@ -28,7 +28,7 @@ func NewClientGo(kubeConfigPath string) (*ClientGo, error) {
 	}, nil
 }
 
-// currentContext use the current context in kubeconfig
+// currentContext use the current context in kubeconfig.
 func currentContext(kubeConfig string) (*rest.Config, error) {
 	config, err := clientcmd.BuildConfigFromFlags("", kubeConfig)
 	if err != nil {
@@ -37,7 +37,7 @@ func currentContext(kubeConfig string) (*rest.Config, error) {
 	return config, nil
 }
 
-// createClient create the clientset
+// createClient create the clientset.
 func createClient(config *rest.Config) (*kubernetes.Clientset, error) {
 	clientSet, err := kubernetes.NewForConfig(config)
 	if err != nil {

@@ -167,7 +167,7 @@ func Start(ctx context.Context, options ...Option) (*ClientSet, error) {
 		cliSet.Skaffold = skaffold
 		err = skaffold.Run(ctx, ket.skaffoldYaml, false)
 		if err != nil {
-			return nil, fmt.Errorf("failed to skaffold run: %s", err)
+			return nil, fmt.Errorf("failed to skaffold run: %w", err)
 		}
 	}
 
