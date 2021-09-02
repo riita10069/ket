@@ -140,7 +140,7 @@ func Start(ctx context.Context, options ...Option) (*ClientSet, error) {
 
 	clientGo, err := k8s.NewClientGo(ket.kubeconfigPath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create client-go: %s", err)
+		return nil, fmt.Errorf("failed to create client-go: %w", err)
 	}
 	cliSet.ClientGo = clientGo
 
@@ -149,12 +149,12 @@ func Start(ctx context.Context, options ...Option) (*ClientSet, error) {
 
 	err = kubectl.UseContext(ctx, ket.kindClusterName)
 	if err != nil {
-		return nil, fmt.Errorf("failed to use context: %s", err)
+		return nil, fmt.Errorf("failed to use context: %w", err)
 	}
 
 	err = kubectl.ApplyKustomize(ctx, ket.crdKustomizePath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to apply crd yaml: %s", err)
+		return nil, fmt.Errorf("failed to apply crd yaml: %w", err)
 	}
 
 	// TODO

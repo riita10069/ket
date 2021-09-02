@@ -1,0 +1,74 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+
+  dependency:
+    runs-on: ubuntu-20.04
+    container:
+      image: golang:1.16.4-buster
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache go modules
+        uses: actions/cache@v2
+        with:
+          path: /go/pkg/mod
+          key: go-mod-${{ hashFiles('go.sum') }}
+
+      - name: Dependencies
+        run: go mod download
+
+  lint:
+    needs: dependency
+    runs-on: ubuntu-20.04
+    container:
+      image: golang:1.16.4-buster
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache dev tools
+        uses: actions/cache@v2
+        with:
+          path: dev/bin
+          key: dev-tools
+
+      - name: Cache go modules
+        uses: actions/cache@v2
+        with:
+          path: /go/pkg/mod
+          key: go-mod-${{ hashFiles('go.sum') }}
+
+      - name: Fmt
+        run: make fmt
+
+      - name: Lint
+        run: make lint
+
+  test:
+    needs: dependency
+    runs-on: ubuntu-20.04
+    container:
+      image: golang:1.16.4-buster
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache dev tools
+        uses: actions/cache@v2
+        with:
+          path: dev/bin
+          key: dev-tools
+
+      - name: Cache go modules
+        uses: actions/cache@v2
+        with:
+          path: /go/pkg/mod
+          key: go-mod-${{ hashFiles('go.sum') }}
+
+      - name: Test
+        run: make test

@@ -47,7 +47,7 @@ func (s *Skaffold) Dir() string {
 func (s *Skaffold) Envs() []string {
 	pwd, err := os.Getwd()
 	if err != nil {
-		fmt.Println("failed to get working directory")
+		return []string{}
 	}
 	binDir := filepath.Join(pwd, s.binDir)
 
@@ -102,7 +102,7 @@ func (s *Skaffold) Execute(ctx context.Context, args []string) error {
 	return cli.Run(ctx, s, args, os.Stdout, os.Stderr)
 }
 
-// Capture execute command with returning outs as string
+// Capture execute command with returning outs as string.
 func (s *Skaffold) Capture(ctx context.Context, args []string) (stdout string, stderr string, err error) {
 	return cli.Capture(ctx, s, args)
 }

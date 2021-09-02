@@ -13,7 +13,7 @@ TOOLS_SUM := $(TOOLS_DIR)/go.sum
 
 DELVE         := $(abspath $(BIN_DIR)/dlv)
 GOFUMPT       := $(abspath $(BIN_DIR)/gofumpt)
-GOLANGCI_LINT := $(abspath $(BIN_DIR)/golangci-lint)-$(GOLANGCI_LINT_VERSION)
+GOLANGCI_LINT := $(abspath $(BIN_DIR)/golangci-lint)
 
 BUILD_TOOLS := cd $(TOOLS_DIR) && go build -o
 

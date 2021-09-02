@@ -217,7 +217,7 @@ func (k *Kubectl) DeleteResource(ctx context.Context, name, namespace, resource 
 	return nil
 }
 
-// WaitAResource waits until deploy is ready
+// WaitAResource waits until deploy is ready.
 func (k *Kubectl) WaitAResource(ctx context.Context, resource string, namespacedName types.NamespacedName) (ready bool, err error) {
 	resource = strings.ToLower(resource)
 	started := time.Now()

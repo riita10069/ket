@@ -9,12 +9,31 @@ output:
   print-linter-name: true
   uniq-by-line: false
 
-linters-settings:
-  lll:
-    line-length: 140
+linter-settings:
+  gosec:
+    includes:
+      - G401
+      - G306
+      - G101
+    excludes:
+      - G204
+    config:
+      G306: "0600"
+      G101:
+        pattern: "(?i)example"
+        ignore_entropy: false
+        entropy_threshold: "80.0"
+        per_char_threshold: "3.0"
+        truncate: "32"
 
 linters:
   enable-all: true
   disable:
     - gochecknoglobals
     - gochecknoinits
+    - godox
+    - nestif
+    - wsl
+    - exhaustivestruct
+    - goerr113
+    - wrapcheck
