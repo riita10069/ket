@@ -4,7 +4,7 @@ OS   := $(shell uname | awk '{print tolower($$0)}')
 ARCH := $(shell case $$(uname -m) in (x86_64) echo amd64 ;; (aarch64) echo arm64 ;; (*) echo $$(uname -m) ;; esac)
 
 
-GOLANGCI_LINT_VERSION := 1.33.0
+GOLANGCI_LINT_VERSION := 1.42.0
 
 DEV_DIR   := $(shell pwd)/_dev
 BIN_DIR   := $(DEV_DIR)/bin
