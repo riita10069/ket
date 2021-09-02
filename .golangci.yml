@@ -1,0 +1,20 @@
+---
+run:
+  timeout: 6m
+  allow-parallel-runners: true
+
+output:
+  format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+  uniq-by-line: false
+
+linters-settings:
+  lll:
+    line-length: 140
+
+linters:
+  enable-all: true
+  disable:
+    - gochecknoglobals
+    - gochecknoinits

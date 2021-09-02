@@ -17,9 +17,8 @@
 ### misc
 /vendor
 /coverage.txt
-/bin
+/_dev/bin
 /dist
-
 
 .idea
 .vscode
