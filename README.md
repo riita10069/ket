@@ -1,3 +1,5 @@
+# ![ket](./ket.png)
+
 # KET(Kind E2e Test framework)
 
 KET is the simplest testing framework for Kubernetes controller.
