@@ -50,6 +50,13 @@ func WithKubeconfigPath(kubeconfigPath string) Option {
 	}
 }
 
+func WithNotCRD() Option {
+	return func(k *KET) error {
+		k.isThereCRD = false
+		return nil
+	}
+}
+
 func WithCRDKustomizePath(crdKustomizePath string) Option {
 	return func(k *KET) error {
 		k.crdKustomizePath = crdKustomizePath
@@ -84,6 +91,7 @@ type KET struct {
 	kindClusterName   string
 	kubernetesVersion string
 	kubeconfigPath    string
+	isThereCRD        bool
 	crdKustomizePath  string
 	useSkaffold       bool
 	skaffoldVersion   string
@@ -101,6 +109,7 @@ func NewKET() *KET {
 		kindClusterName:   "ket",
 		kubernetesVersion: "1.20.2",
 		kubeconfigPath:    filepath.Join(homeDir, ".kube", "config"),
+		isThereCRD:        true,
 		crdKustomizePath:  "",
 		useSkaffold:       false,
 		skaffoldVersion:   "1.26.1",
@@ -152,9 +161,11 @@ func Start(ctx context.Context, options ...Option) (*ClientSet, error) {
 		return nil, fmt.Errorf("failed to use context: %w", err)
 	}
 
-	err = kubectl.ApplyKustomize(ctx, ket.crdKustomizePath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to apply crd yaml: %w", err)
+	if ket.isThereCRD {
+		err = kubectl.ApplyKustomize(ctx, ket.crdKustomizePath)
+		if err != nil {
+			return nil, fmt.Errorf("failed to apply crd yaml: %w", err)
+		}
 	}
 
 	// TODO
