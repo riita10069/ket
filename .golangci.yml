@@ -54,4 +54,5 @@ linters:
     - ifshort
     - golint
     - scopelint
+    - cyclop
   fast: false
