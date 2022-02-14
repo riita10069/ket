@@ -2,7 +2,6 @@ package cli_test
 
 import (
 	"context"
-	"os"
 	"testing"
 
 	"github.com/riita10069/ket/pkg/cli"
@@ -28,7 +27,7 @@ func Test_get(t *testing.T) {
 		{
 			name: "get kubectl binary",
 			args: args{
-				kubectl.NewKubectl("1.20.2", binDir, kubeconfigPath),
+				kubectl.NewKubectl("1.21.2", binDir, kubeconfigPath),
 			},
 			wantErr: false,
 		},
@@ -57,9 +56,9 @@ func Test_get(t *testing.T) {
 		})
 	}
 
-	err := os.RemoveAll(binDir)
-	if err != nil {
-		t.Errorf("failed to remove binary directory: %v", err)
-		return
-	}
+	//err := os.RemoveAll(binDir)
+	//if err != nil {
+	//	t.Errorf("failed to remove binary directory: %v", err)
+	//	return
+	//}
 }

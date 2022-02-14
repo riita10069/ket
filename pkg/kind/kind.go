@@ -3,8 +3,6 @@ package kind
 import (
 	"context"
 	"fmt"
-	"io"
-	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -13,10 +11,11 @@ import (
 )
 
 type Kind struct {
+	name              string
 	version           string
 	kubernetesVersion string
-	name              string
 	binDir            string
+	url               string
 	kubeConfigPath    string
 }
 
@@ -25,6 +24,7 @@ func NewKind(kindVersion, kubernetesVersion, binDir, kubeConfigPath string) *Kin
 		version:           kindVersion,
 		name:              "kind",
 		binDir:            binDir,
+		url:               fmt.Sprintf("https://github.com/kubernetes-sigs/kind/releases/download/v%s/kind-%s-%s", kindVersion, runtime.GOOS, runtime.GOARCH),
 		kubeConfigPath:    kubeConfigPath,
 		kubernetesVersion: kubernetesVersion,
 	}
@@ -46,48 +46,12 @@ func (k *Kind) Dir() string {
 	return k.binDir
 }
 
+func (k *Kind) URL() string {
+	return k.url
+}
+
 func (k *Kind) Envs() []string {
 	return []string{}
-}
-
-func (k *Kind) DownloadURL() string {
-	return fmt.Sprintf("https://github.com/kubernetes-sigs/kind/releases/download/v%s/kind-%s-%s", k.Version(), runtime.GOOS, runtime.GOARCH)
-}
-
-func (k *Kind) Download(ctx context.Context) (io.ReadCloser, error) {
-	client := http.DefaultClient
-	req, err := http.NewRequest(http.MethodGet, k.DownloadURL(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("failed to initialize request: %w", err)
-	}
-	req = req.WithContext(ctx)
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("kind url responses error: %w", err)
-	}
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("kind url responses bad status: %s", resp.Status)
-	}
-	return resp.Body, nil
-}
-
-func (k *Kind) Install(ctx context.Context, file io.Reader) error {
-	bin, err := os.Create(k.Path())
-	if err != nil {
-		return fmt.Errorf("can't create kind binary path: %w", err)
-	}
-	defer bin.Close()
-
-	_, err = io.Copy(bin, file)
-	if err != nil {
-		return fmt.Errorf("failed to copy kind binary to %s: %w", k.Path(), err)
-	}
-
-	err = os.Chmod(k.Path(), 0o755)
-	if err != nil {
-		return fmt.Errorf("failed to chmod when kind binary path: %w", err)
-	}
-	return nil
 }
 
 // Execute If OutPut is necessary, use Capture. Execute uses os.Stderr.
