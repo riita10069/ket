@@ -28,7 +28,7 @@ func Test_get(t *testing.T) {
 		{
 			name: "get kubectl binary",
 			args: args{
-				kubectl.NewKubectl("1.20.2", binDir, kubeconfigPath),
+				kubectl.NewKubectl("1.21.2", binDir, kubeconfigPath),
 			},
 			wantErr: false,
 		},

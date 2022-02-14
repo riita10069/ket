@@ -1,16 +1,10 @@
 package cli
 
-import (
-	"context"
-	"io"
-)
-
 type CLI interface {
-	Version() string
 	Name() string
+	Version() string
 	Path() string
 	Dir() string
-	Download(context.Context) (io.ReadCloser, error)
-	Install(context.Context, io.Reader) error
+	URL() string
 	Envs() []string
 }
