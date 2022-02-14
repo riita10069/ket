@@ -24,7 +24,7 @@ func NewSkaffold(version, binDir, kubeConfigPath string) *Skaffold {
 		name:           "skaffold",
 		binDir:         binDir,
 		kubeConfigPath: kubeConfigPath,
-		url: fmt.Sprintf("https://storage.googleapis.com/skaffold/releases/v%s/skaffold-%s-%s", version, runtime.GOOS, runtime.GOARCH),
+		url:            fmt.Sprintf("https://storage.googleapis.com/skaffold/releases/v%s/skaffold-%s-%s", version, runtime.GOOS, runtime.GOARCH),
 	}
 }
 

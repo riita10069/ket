@@ -3,10 +3,11 @@ package kubectl
 import (
 	"context"
 	"fmt"
-	"github.com/riita10069/ket/pkg/cli"
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"github.com/riita10069/ket/pkg/cli"
 )
 
 type Kubectl struct {
